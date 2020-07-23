@@ -25,6 +25,23 @@ class DressSpider(scrapy.Spider):
                     "id" : dress["id"],
                     "name" : dress["name"],
                     "price" : dress["price"],
-                    "media" : dress["media"],
-                    "options" : dress["options"] 
+                    "media" : [ self.mapMedia(media) for media in dress["media"] ],
+                    "options" : [ self.mapOptions(option) for option in dress["options"] ]
                 }
+    
+    
+    def mapMedia(self, media):
+        return {
+            "fullUrl" : media["fullUrl"]
+        }
+
+    def mapOptions(self,option):
+        return {
+            "option" : [ self.mapDomain(domain) for domain in option["selections"] ]
+        }
+    
+    def mapDomain(self,domain):
+        return {
+            "value" : domain["value"]
+        }
+    
