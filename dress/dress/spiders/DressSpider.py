@@ -20,13 +20,13 @@ class DressSpider(scrapy.Spider):
                 json_text = json_search.group(1)
                 data = json.loads(json_text)
                 dress = data["tpaWidgetNativeInitData"]["TPAMultiSection_jenllqhb"]["wixCodeProps"]["product"]
-
+  
                 yield {
                     "id" : dress["id"],
                     "name" : dress["name"],
                     "price" : dress["price"],
                     "media" : [ self.mapMedia(media) for media in dress["media"] ],
-                    "options" : [ self.mapOptions(option) for option in dress["options"] ]
+                    "attributes" : [ self.mapOptions(option) for option in dress["options"] ]
                 }
     
     
@@ -37,11 +37,6 @@ class DressSpider(scrapy.Spider):
 
     def mapOptions(self,option):
         return {
-            "option" : [ self.mapDomain(domain) for domain in option["selections"] ]
-        }
-    
-    def mapDomain(self,domain):
-        return {
-            "value" : domain["value"]
+            option["title"] : [ domain["value"] for domain in option["selections"] ]
         }
     
