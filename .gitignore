@@ -2,4 +2,5 @@
 ./dress/dress/__pycache__/**
 ./dress/dress/spiders/__pycache__
 ./dress/dress/spiders/__pycache__/**
-
+dress/dress/spiders/__pycache__/**
+dress/dress/__pycache__/**
